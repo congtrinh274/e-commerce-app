@@ -17,6 +17,7 @@ const COLORS = {
     lightWhite: '#FAFAFC',
     lightGreen: '#0f7e4a',
     lighterGreen: '#2ba56a',
+    leaveGreen: '#18a561',
 
     text: '#707070',
 };

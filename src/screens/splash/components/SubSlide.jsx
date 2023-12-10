@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { COLORS } from '../../../constants/';
-import CustomText from '../../../components/customUI/customText';
+import CustomText from '../../../components/customUI/CustomText';
 
 export const SubSlide = ({ subtitle, des, last, NextSlide, EnterApp }) => {
     const bgColor = last ? '#2CB9B0' : 'rgba(12,13,52,0.05)';

@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const { height, width } = Dimensions.get('window');
 
-export const Splash = () => {
+const Splash = () => {
     const scrollX = useRef(new Animated.Value(0)).current;
     const scrollClick = useRef(null);
     const unmounted = useRef(false);

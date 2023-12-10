@@ -1,14 +1,27 @@
-import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { View, StyleSheet, ImageBackground, Dimensions } from 'react-native';
+//Components
+import LoginForm from './components/LoginForm';
 
-const Login = () => {
+const { height, width } = Dimensions.get('window');
+
+const Login = ({ navigation }) => {
     return (
-        <View>
-            <Text>Login</Text>
+        <View style={styles.container}>
+            <ImageBackground
+                style={{ flex: 1, position: 'absolute', height, width }}
+                source={require('../../../assets/Images/flower3.jpg')}
+                blurRadius={10}
+            ></ImageBackground>
+            <LoginForm navigation={navigation} />
         </View>
     );
 };
 
-export default Login;
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+});
 
-const styles = StyleSheet.create({});
+export default Login;
