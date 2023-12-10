@@ -1,5 +1,6 @@
 import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, Fontisto } from '@expo/vector-icons';
 
@@ -10,6 +11,7 @@ import Heading from '../../components/home/Heading';
 import ProductRow from '../../components/product/ProductRow';
 
 const Home = () => {
+    const navigation = useNavigation();
     return (
         <SafeAreaView>
             <View style={styles.appBarWrapper}>
@@ -23,7 +25,7 @@ const Home = () => {
                         <View style={styles.cartCount}>
                             <Text style={styles.cartNumber}>8</Text>
                         </View>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
                             <Ionicons name="cart-outline" size={28} />
                         </TouchableOpacity>
                     </View>

@@ -1,13 +1,7 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback } from 'react';
-import BottomTabNavigation from './src/navigation/BottomTabNavigation';
-import { Cart, ProductDetails } from './src/screens';
-
-const Stack = createNativeStackNavigator();
+import AppNavigation from './src/navigation/AppNavigation';
 
 export default function App() {
     const [fontsLoaded] = useFonts({
@@ -28,17 +22,5 @@ export default function App() {
         return null;
     }
 
-    return (
-        <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen
-                    name="Bottom Navigation"
-                    component={BottomTabNavigation}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen name="Cart" component={Cart} options={{ headerShown: false }} />
-                <Stack.Screen name="ProductDetails" component={ProductDetails} options={{ headerShown: false }} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
+    return <AppNavigation />;
 }

@@ -1,14 +1,14 @@
-import { Text, View } from 'react-native';
-import React, { Component } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
 
-export class Cart extends Component {
-    render() {
-        return (
-            <View>
-                <Text>Cart</Text>
-            </View>
-        );
-    }
-}
+const Cart = () => {
+    return (
+        <View>
+            <Text>Cart</Text>
+        </View>
+    );
+};
 
 export default Cart;
+
+const styles = StyleSheet.create({});
