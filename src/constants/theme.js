@@ -15,6 +15,10 @@ const COLORS = {
     red: '#e81e4d',
     green: ' #00C135',
     lightWhite: '#FAFAFC',
+    lightGreen: '#0f7e4a',
+    lighterGreen: '#2ba56a',
+
+    text: '#707070',
 };
 
 const SIZES = {
