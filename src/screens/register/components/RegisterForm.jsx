@@ -18,12 +18,14 @@ import CustomText from '../../../components/customUI/CustomText';
 import TextInput from './Field';
 import styles from './registerForm.styles';
 import { registerValidate as validate } from '../../../utils/registerValidate';
+import { register } from '../../../redux/features/auth/authSlices';
 
 const RegisterForm = () => {
     const navigation = useNavigation();
     const [loading, setLoading] = useState(false);
     const [showPass, setShowPass] = useState(false);
     const [showConfirmPass, setShowConfirmPass] = useState(false);
+    const [inputData, setInputData] = useState({ username: '', email: '', password: '', confirmPassword: '' });
     const unmounted = useRef(false);
 
     const dispatch = useDispatch();
@@ -43,7 +45,28 @@ const RegisterForm = () => {
         setShowConfirmPass((prevShowPass) => !prevShowPass);
     };
 
-    const submit = async () => {};
+    const submit = async () => {
+        try {
+            setLoading(true);
+            const { username, email, password, confirmPassword } = inputData;
+            const formErrors = validate({ username, email, password, confirmPassword });
+            if (Object.keys(formErrors).length > 0) {
+                Alert.alert('Lỗi', formErrors);
+                setLoading(false);
+                return;
+            }
+            await dispatch(register(username, email, password));
+            navigation.navigate('VerifyEmail');
+        } catch (error) {
+            if (error.message === 'Request timeout') {
+                Alert.alert('Error', 'Server does not response!');
+            } else {
+                Alert.alert('Error', error);
+            }
+            setLoading(false);
+        }
+    };
+    console.log(auth);
 
     return (
         <KeyboardAvoidingView
@@ -81,6 +104,7 @@ const RegisterForm = () => {
                                 icon="id-card"
                                 tyle={styles.textInput}
                                 theme={{ colors: { primary: COLORS.leaveGreen } }}
+                                onChangeText={(text) => setInputData({ ...inputData, username: text })}
                             />
                             <TextInput
                                 label="Email"
@@ -88,6 +112,7 @@ const RegisterForm = () => {
                                 keyboardType="email-address"
                                 icon="email"
                                 theme={{ colors: { primary: COLORS.leaveGreen } }}
+                                onChangeText={(text) => setInputData({ ...inputData, email: text })}
                             />
                             <TextInput
                                 name="password"
@@ -96,6 +121,7 @@ const RegisterForm = () => {
                                 secureTextEntry={showPass ? false : true}
                                 onToggleShowPass={toggleShowPass}
                                 icon={showPass ? 'eye-off' : 'eye'}
+                                onChangeText={(text) => setInputData({ ...inputData, password: text })}
                             />
                             <TextInput
                                 name="confirmPassword"
@@ -104,6 +130,7 @@ const RegisterForm = () => {
                                 secureTextEntry={showConfirmPass ? false : true}
                                 onToggleShowPass={toggleShowConfirmPass}
                                 icon={showConfirmPass ? 'eye-off' : 'eye'}
+                                onChangeText={(text) => setInputData({ ...inputData, confirmPassword: text })}
                             />
                         </View>
 

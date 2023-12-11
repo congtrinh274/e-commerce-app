@@ -6,5 +6,6 @@ import Search from './search/Search';
 import Profile from './profile/Profile';
 import Cart from './cart/Cart';
 import ProductDetails from './product/ProductDetails';
+import VerifyEmail from './verify/VerifyEmail';
 
-export { Splash, Login, Register, Home, Search, Profile, Cart, ProductDetails };
+export { Splash, Login, Register, Home, Search, Profile, Cart, ProductDetails, VerifyEmail };

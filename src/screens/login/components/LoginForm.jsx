@@ -46,11 +46,12 @@ const LoginForm = () => {
 
             await dispatch(login(email, password));
             navigation.navigate('BottomNavigation');
-        } catch (err) {
-            if (err.message === 'Request timeout') {
+        } catch (error) {
+            console.log(123);
+            if (error.message === 'Request timeout') {
                 Alert.alert('Error', 'Server does not response!');
             } else {
-                Alert.alert('Error', err);
+                Alert.alert('Error', error);
             }
             setLoading(false);
         }

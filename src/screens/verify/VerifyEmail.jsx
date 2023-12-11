@@ -1,10 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, ImageBackground, Dimensions } from 'react-native';
-import RegisterForm from './components/RegisterForm';
+import { View, StyleSheet, ImageBackground, Dimensions, Text } from 'react-native';
 
 const { height, width } = Dimensions.get('window');
 
-const Register = () => {
+const VerifyEmail = () => {
     return (
         <View style={styles.container}>
             <ImageBackground
@@ -12,7 +11,7 @@ const Register = () => {
                 source={require('../../../assets/Images/flower3.jpg')}
                 blurRadius={10}
             ></ImageBackground>
-            <RegisterForm />
+            <Text>Verify Email</Text>
         </View>
     );
 };
@@ -23,4 +22,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Register;
+export default VerifyEmail;
