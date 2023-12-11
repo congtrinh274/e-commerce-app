@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, StyleSheet, ImageBackground, Dimensions } from 'react-native';
-//Components
 import LoginForm from './components/LoginForm';
 
 const { height, width } = Dimensions.get('window');

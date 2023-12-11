@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     View,
     TouchableOpacity,
@@ -17,14 +18,17 @@ import CustomText from '../../../components/customUI/CustomText';
 import TextInput from './Field';
 import styles from './loginForm.styles';
 import { loginValidate as validate } from '../../../utils/loginValidate';
+import { login } from '../../../redux/features/auth/authSlices';
 
-const LoginForm = (props) => {
+const LoginForm = () => {
     const navigation = useNavigation();
     const [showPass, setShowPass] = useState(false);
     const [loading, setLoading] = useState(false);
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const dispatch = useDispatch();
+    const auth = useSelector((state) => state.auth);
 
     const toggleShowPass = () => {
         setShowPass((prevShowPass) => !prevShowPass);
@@ -32,21 +36,27 @@ const LoginForm = (props) => {
 
     const submit = async () => {
         try {
+            setLoading(true);
             const formErrors = validate({ email, password });
             if (Object.keys(formErrors).length > 0) {
                 Alert.alert('Lỗi', formErrors);
+                setLoading(false);
                 return;
             }
 
-            setLoading(true);
-            if (auth.error) {
-                Alert.alert('Lỗi', auth.error);
-            }
+            await dispatch(login(email, password));
+            navigation.navigate('BottomNavigation');
         } catch (err) {
+            if (err.message === 'Request timeout') {
+                Alert.alert('Error', 'Server does not response!');
+            } else {
+                Alert.alert('Error', err);
+            }
             setLoading(false);
-            alert(err);
         }
     };
+
+    console.log(auth);
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'position' : 'height'}>
