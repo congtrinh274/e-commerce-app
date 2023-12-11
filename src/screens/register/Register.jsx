@@ -1,14 +1,26 @@
-import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { View, StyleSheet, ImageBackground, Dimensions } from 'react-native';
+import RegisterForm from './components/RegisterForm';
 
-const Register = () => {
+const { height, width } = Dimensions.get('window');
+
+const Register = ({ navigation }) => {
     return (
-        <View>
-            <Text>Register</Text>
+        <View style={styles.container}>
+            <ImageBackground
+                style={{ flex: 1, position: 'absolute', height, width }}
+                source={require('../../../assets/Images/flower3.jpg')}
+                blurRadius={10}
+            ></ImageBackground>
+            <RegisterForm navigation={navigation} />
         </View>
     );
 };
 
-export default Register;
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+});
 
-const styles = StyleSheet.create({});
+export default Register;

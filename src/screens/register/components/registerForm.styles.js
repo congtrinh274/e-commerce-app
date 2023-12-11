@@ -1,28 +1,16 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { COLORS, SIZES } from '../../../constants';
 
-const { height } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-    group: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        marginVertical: 10,
-    },
     header: {
-        marginTop: height * 0.2,
-        marginBottom: 10,
-        marginHorizontal: 20,
-    },
-    title: {
-        color: COLORS.lightGreen,
-        fontSize: 40,
-        letterSpacing: 5,
-        fontFamily: 'bold',
-        textAlign: 'center',
-    },
-    text: {
-        color: '#fff',
+        marginTop: height * 0.15,
+        width: width,
+        marginBottom: 40,
+        paddingHorizontal: 20,
+        backgroundColor: COLORS.white,
+        zIndex: 1,
     },
     signIn: {
         width: '100%',
@@ -32,6 +20,14 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         flexDirection: 'row',
         backgroundColor: COLORS.lighterGreen,
+        marginTop: 10,
+    },
+    title: {
+        color: COLORS.lightGreen,
+        fontSize: 40,
+        letterSpacing: 5,
+        fontFamily: 'bold',
+        textAlign: 'center',
     },
     textSign: {
         fontSize: 15,
@@ -42,20 +38,10 @@ const styles = StyleSheet.create({
         color: COLORS.lighterGreen,
         textAlign: 'center',
     },
-    textInput: {
-        fontSize: 14,
-        backgroundColor: 'transparent',
-        marginVertical: 5,
-    },
     center: {
         alignItems: 'center',
     },
-    faceid: {
-        resizeMode: 'contain',
-        height: 70,
-        width: 70,
-    },
-    registerDirection: {
+    loginDirection: {
         color: COLORS.red,
         fontFamily: 'medium',
         fontSize: SIZES.medium,
