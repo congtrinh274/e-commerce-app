@@ -66,7 +66,6 @@ const RegisterForm = () => {
             setLoading(false);
         }
     };
-    console.log(auth);
 
     return (
         <KeyboardAvoidingView
