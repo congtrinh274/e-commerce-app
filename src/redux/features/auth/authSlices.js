@@ -6,9 +6,10 @@ const authSlice = createSlice({
     name: 'auth',
     initialState: {
         user: {},
-        token: null,
+        accessToken: null,
         isLoading: false,
         error: false,
+        refreshToken: null,
     },
     reducers: {
         AUTH_LOADING: (state, action) => {
@@ -17,7 +18,8 @@ const authSlice = createSlice({
         LOGIN: (state, action) => {
             state.isLoading = false;
             state.user = action.payload.data;
-            state.token = action.payload.meta;
+            state.accessToken = action.payload.accessToken;
+            state.refreshToken = action.payload.refreshToken;
         },
         REGISTER: (state, action) => {
             state.isLoading = false;
@@ -36,7 +38,7 @@ export const login = (email, password) => async (dispatch) => {
     dispatch(AUTH_LOADING());
     try {
         const response = await axios.post(
-            'http://172.20.10.3:3000/users/login',
+            'http://192.168.1.19:3000/auth/login',
             {
                 email,
                 password,
@@ -64,7 +66,7 @@ export const register = (username, email, password) => async (dispatch) => {
     dispatch(AUTH_LOADING());
     try {
         const response = await axios.post(
-            'http://172.20.10.3:3000/users/register',
+            'http://192.168.1.19:3000/auth/register',
             {
                 username,
                 email,
@@ -76,27 +78,6 @@ export const register = (username, email, password) => async (dispatch) => {
         );
 
         dispatch(REGISTER(response.data));
-    } catch (error) {
-        if (error.code === 'ECONNABORTED') {
-            console.log('Request timed out');
-            dispatch(AUTH_FAILURE());
-            throw new Error('Request timeout');
-        } else {
-            console.log('Error:', error);
-            dispatch(AUTH_FAILURE());
-            throw error.response.data.error;
-        }
-    }
-};
-
-export const verifyEmail = (email) => async (dispatch) => {
-    dispatch(AUTH_LOADING());
-    try {
-        const response = await axios.get(`http://172.20.10.3:3000/users/get-user?${email}`, {
-            timeout: 3000,
-        });
-
-        dispatch(LOGIN(response.data));
     } catch (error) {
         if (error.code === 'ECONNABORTED') {
             console.log('Request timed out');

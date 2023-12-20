@@ -16,41 +16,34 @@ import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../../../constants';
 import CustomText from '../../../components/customUI/CustomText';
 import TextInput from './Field';
-import styles from './loginForm.styles';
-import { loginValidate as validate } from '../../../utils/validator/loginValidate';
-import { login } from '../../../redux/features/auth/authSlices';
+import { storeRegisterValidator as validate } from '../../../utils/validator/storeRegisterValidator';
+import styles from './storeRegisterForm.styles';
 
-const LoginForm = () => {
+const StoreRegisterForm = () => {
+    const user = useSelector((state) => state.auth.user);
+    const accessToken = useSelector((state) => state.auth.accessToken);
     const navigation = useNavigation();
-    const [showPass, setShowPass] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-    const dispatch = useDispatch();
-
-    const toggleShowPass = () => {
-        setShowPass((prevShowPass) => !prevShowPass);
-    };
+    const [shopName, setShopName] = useState(`Shop của ${user.username}`);
+    const [wareHouseAddress, setWareHouseAddress] = useState(user.address);
+    const [email, setEmail] = useState(user.email);
+    const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
 
     const submit = async () => {
         try {
             setLoading(true);
-            const formErrors = validate({ email, password });
+            const formErrors = validate({ shopName, wareHouseAddress, email, phoneNumber });
             if (Object.keys(formErrors).length > 0) {
                 Alert.alert('Lỗi', formErrors);
                 setLoading(false);
                 return;
             }
-
-            await dispatch(login(email, password));
-            navigation.navigate('BottomNavigation');
         } catch (error) {
-            if (error.message === 'Request timeout') {
-                Alert.alert('Error', 'Server does not response!');
-            } else {
-                Alert.alert('Error', error);
-            }
+            // if (error.message === 'Request timeout') {
+            //     Alert.alert('Error', 'Server does not response!');
+            // } else {
+            //     Alert.alert('Error', error);
+            // }
             setLoading(false);
         }
     };
@@ -63,7 +56,7 @@ const LoginForm = () => {
 
             <View style={styles.header}>
                 <View>
-                    <CustomText style={styles.title}>LOGIN</CustomText>
+                    <CustomText style={styles.title}>Open your store</CustomText>
                 </View>
             </View>
             <ScrollView>
@@ -71,50 +64,47 @@ const LoginForm = () => {
                     <View style={{ flexDirection: 'column', marginHorizontal: 10, zIndex: -1 }}>
                         <View>
                             <TextInput
-                                label="Email"
-                                keyboardType="email-address"
-                                value={email}
+                                label="Shop name"
+                                keyboardType="default"
+                                value={shopName}
                                 style={styles.textInput}
                                 selectionColor={COLORS.leaveGreen}
                                 theme={{ colors: { primary: COLORS.leaveGreen } }}
+                                onChangeText={(text) => setShopName(text)}
+                            />
+                            <TextInput
+                                label="Warehouse address"
+                                keyboardType="default"
+                                value={wareHouseAddress}
+                                onChangeText={(text) => setWareHouseAddress(text)}
+                            />
+                            <TextInput
+                                label="Email"
+                                keyboardType="email-address"
+                                value={email}
                                 onChangeText={(text) => setEmail(text)}
                             />
                             <TextInput
-                                label="Password"
+                                label="Phone number"
                                 keyboardType="default"
-                                secureTextEntry={!showPass}
-                                value={password}
-                                onChangeText={(text) => setPassword(text)}
-                                onToggleShowPass={toggleShowPass}
-                                icon={showPass ? 'eye-off' : 'eye'}
+                                value={phoneNumber}
+                                onChangeText={(text) => setPhoneNumber(text)}
                             />
                         </View>
-                        <View style={styles.group}>
-                            <TouchableOpacity onPress={() => {}}>
-                                <CustomText style={{ ...styles.textSignSmall, fontFamily: 'medium' }}>
-                                    Forget Password ?
-                                </CustomText>
-                            </TouchableOpacity>
-                        </View>
                         <TouchableOpacity onPress={submit} style={{ marginVertical: 10, alignItems: 'center' }}>
-                            <View style={styles.signIn}>
+                            <View style={styles.Register}>
                                 {loading ? (
                                     <ActivityIndicator size="small" color="#fff" />
                                 ) : (
-                                    <CustomText style={styles.textSign}>Login</CustomText>
+                                    <CustomText style={styles.textSign}>Register</CustomText>
                                 )}
                             </View>
                         </TouchableOpacity>
                     </View>
                 </TouchableWithoutFeedback>
-                <View style={styles.center}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-                        <CustomText style={styles.registerDirection}>Don't have an account yet? Sign Up</CustomText>
-                    </TouchableOpacity>
-                </View>
             </ScrollView>
         </KeyboardAvoidingView>
     );
 };
 
-export default LoginForm;
+export default StoreRegisterForm;

@@ -17,7 +17,7 @@ import { COLORS } from '../../../constants';
 import CustomText from '../../../components/customUI/CustomText';
 import TextInput from './Field';
 import styles from './registerForm.styles';
-import { registerValidate as validate } from '../../../utils/registerValidate';
+import { registerValidate as validate } from '../../../utils/validator/registerValidate';
 import { register } from '../../../redux/features/auth/authSlices';
 
 const RegisterForm = () => {
@@ -79,7 +79,7 @@ const RegisterForm = () => {
                 }}
                 style={{ position: 'absolute', top: 50, left: 20, zIndex: 10 }}
             >
-                <Ionicons name="ios-arrow-back" size={35} color={COLORS.light_green} />
+                <Ionicons name="ios-arrow-back" size={35} color={COLORS.lightGreen} />
             </TouchableOpacity>
 
             <View style={styles.header}></View>
