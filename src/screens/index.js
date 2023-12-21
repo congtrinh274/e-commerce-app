@@ -8,5 +8,6 @@ import Cart from './cart/Cart';
 import ProductDetails from './product/ProductDetails';
 import VerifyEmail from './verify/VerifyEmail';
 import StoreRegister from './store/StoreRegister';
+import HomeStore from './store/HomeStore';
 
-export { Splash, Login, Register, Home, Search, Profile, Cart, ProductDetails, VerifyEmail, StoreRegister };
+export { Splash, Login, Register, Home, Search, Profile, Cart, ProductDetails, VerifyEmail, StoreRegister, HomeStore };

@@ -17,6 +17,7 @@ import { COLORS } from '../../../constants';
 import CustomText from '../../../components/customUI/CustomText';
 import TextInput from './Field';
 import { storeRegisterValidator as validate } from '../../../utils/validator/storeRegisterValidator';
+import { registerStore } from '../../../redux/features/storeSlices';
 import styles from './storeRegisterForm.styles';
 
 const StoreRegisterForm = () => {
@@ -25,9 +26,12 @@ const StoreRegisterForm = () => {
     const navigation = useNavigation();
     const [loading, setLoading] = useState(false);
     const [shopName, setShopName] = useState(`Shop của ${user.username}`);
-    const [wareHouseAddress, setWareHouseAddress] = useState(user.address);
+    const [bio, setBio] = useState('');
+    const [wareHouseAddress, setWareHouseAddress] = useState(user.address || '536 Điện Biên Phủ');
     const [email, setEmail] = useState(user.email);
-    const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
+    const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber || '0799164654');
+
+    const dispatch = useDispatch();
 
     const submit = async () => {
         try {
@@ -38,12 +42,15 @@ const StoreRegisterForm = () => {
                 setLoading(false);
                 return;
             }
+
+            await dispatch(registerStore(shopName, bio, phoneNumber, wareHouseAddress, accessToken));
+            navigation.navigate('HomeStore');
         } catch (error) {
-            // if (error.message === 'Request timeout') {
-            //     Alert.alert('Error', 'Server does not response!');
-            // } else {
-            //     Alert.alert('Error', error);
-            // }
+            if (error.message === 'Request timeout') {
+                Alert.alert('Error', 'Server does not response!');
+            } else {
+                Alert.alert('Error', error);
+            }
             setLoading(false);
         }
     };
@@ -73,21 +80,39 @@ const StoreRegisterForm = () => {
                                 onChangeText={(text) => setShopName(text)}
                             />
                             <TextInput
+                                label="Bio"
+                                keyboardType="default"
+                                value={bio}
+                                style={styles.textInput}
+                                selectionColor={COLORS.leaveGreen}
+                                theme={{ colors: { primary: COLORS.leaveGreen } }}
+                                onChangeText={(text) => setBio(text)}
+                            />
+                            <TextInput
                                 label="Warehouse address"
                                 keyboardType="default"
                                 value={wareHouseAddress}
+                                style={styles.textInput}
+                                selectionColor={COLORS.leaveGreen}
+                                theme={{ colors: { primary: COLORS.leaveGreen } }}
                                 onChangeText={(text) => setWareHouseAddress(text)}
                             />
                             <TextInput
                                 label="Email"
                                 keyboardType="email-address"
                                 value={email}
+                                style={styles.textInput}
+                                selectionColor={COLORS.leaveGreen}
+                                theme={{ colors: { primary: COLORS.leaveGreen } }}
                                 onChangeText={(text) => setEmail(text)}
                             />
                             <TextInput
                                 label="Phone number"
                                 keyboardType="default"
                                 value={phoneNumber}
+                                style={styles.textInput}
+                                selectionColor={COLORS.leaveGreen}
+                                theme={{ colors: { primary: COLORS.leaveGreen } }}
                                 onChangeText={(text) => setPhoneNumber(text)}
                             />
                         </View>

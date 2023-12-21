@@ -18,7 +18,7 @@ import CustomText from '../../../components/customUI/CustomText';
 import TextInput from './Field';
 import styles from './registerForm.styles';
 import { registerValidate as validate } from '../../../utils/validator/registerValidate';
-import { register } from '../../../redux/features/auth/authSlices';
+import { register } from '../../../redux/features/authSlices';
 
 const RegisterForm = () => {
     const navigation = useNavigation();

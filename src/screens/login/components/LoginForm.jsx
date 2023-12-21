@@ -18,7 +18,7 @@ import CustomText from '../../../components/customUI/CustomText';
 import TextInput from './Field';
 import styles from './loginForm.styles';
 import { loginValidate as validate } from '../../../utils/validator/loginValidate';
-import { login } from '../../../redux/features/auth/authSlices';
+import { login } from '../../../redux/features/authSlices';
 
 const LoginForm = () => {
     const navigation = useNavigation();
