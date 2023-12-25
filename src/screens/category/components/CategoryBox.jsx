@@ -40,6 +40,13 @@ const styles = StyleSheet.create({
         marginTop: 100,
         width: '100%',
         borderRadius: 6,
+    },
+    headerContainer: {
+        padding: 8,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         ...Platform.select({
             ios: {
                 shadowColor: 'black',
@@ -51,13 +58,6 @@ const styles = StyleSheet.create({
                 elevation: 4,
             },
         }),
-    },
-    headerContainer: {
-        padding: 8,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
     },
     headerTitle: {
         display: 'flex',

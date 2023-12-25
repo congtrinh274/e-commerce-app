@@ -1,12 +1,16 @@
-import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, Platform } from 'react-native';
 import React from 'react';
 import { COLORS, SIZES } from '../../constants';
-import { Ionicons } from '@expo/vector-icons';
 
 const CategoryCard = ({ icon = 'logo-electron', name = 'Categories' }) => {
+    const apiBaseUrl = 'http://192.168.1.11:3000'; // Thay thế bằng địa chỉ thực tế của server
+
+    // Xử lý đường dẫn tương đối thành đường dẫn tuyệt đối
+    const absoluteIconPath = `${apiBaseUrl}/${icon.replace(/\\/g, '/')}`;
+
     return (
         <TouchableOpacity style={styles.container}>
-            <Image style={styles.icon} source={{ uri: icon }} />
+            <Image style={styles.icon} source={{ uri: absoluteIconPath }} />
             <Text style={styles.name}>{name}</Text>
         </TouchableOpacity>
     );
@@ -20,8 +24,20 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: COLORS.offWhite,
+        backgroundColor: COLORS.secondary,
         borderRadius: 10,
+        margin: 4,
+        ...Platform.select({
+            ios: {
+                shadowColor: 'black',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.3,
+                shadowRadius: 4,
+            },
+            android: {
+                elevation: 4,
+            },
+        }),
     },
     icon: {
         width: 24,

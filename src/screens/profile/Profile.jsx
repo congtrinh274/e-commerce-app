@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Dimensions, Alert } from 'react-native';
+import { View, StyleSheet, Dimensions, Alert, SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { Ionicons } from '@expo/vector-icons';
@@ -83,17 +83,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     profileContainer: {
-        width,
         justifyContent: 'center',
         alignItems: 'center',
     },
     profileBox: {
+        height: '100%',
         backgroundColor: '#fff',
         borderRadius: 20,
         width,
         alignItems: 'center',
     },
     OptionsContainer: {
+        padding: 12,
         marginTop: 20,
         width: '100%',
     },

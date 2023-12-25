@@ -1,4 +1,4 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 const { height, width } = Dimensions.get('window');
 
 const COLORS = {
@@ -45,7 +45,17 @@ const SHADOWS = {
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-        elevation: 2,
+        ...Platform.select({
+            ios: {
+                shadowColor: 'black',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.3,
+                shadowRadius: 4,
+            },
+            android: {
+                elevation: 4,
+            },
+        }),
     },
     medium: {
         shadowColor: '#000',
@@ -55,7 +65,17 @@ const SHADOWS = {
         },
         shadowOpacity: 0.25,
         shadowRadius: 5.84,
-        elevation: 5,
+        ...Platform.select({
+            ios: {
+                shadowColor: 'black',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.3,
+                shadowRadius: 4,
+            },
+            android: {
+                elevation: 4,
+            },
+        }),
     },
 };
 

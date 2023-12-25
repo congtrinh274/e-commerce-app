@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Platform } from 'react-native';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../../constants';
@@ -29,7 +29,17 @@ const styles = StyleSheet.create({
         padding: 20,
         borderRadius: 10,
         margin: 5,
-        elevation: 5,
+        ...Platform.select({
+            ios: {
+                shadowColor: 'black',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.3,
+                shadowRadius: 4,
+            },
+            android: {
+                elevation: 4,
+            },
+        }),
     },
     iconContainer: {
         display: 'flex',

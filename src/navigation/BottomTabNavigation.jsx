@@ -1,4 +1,5 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home, Search, Profile } from '../screens';
 import { Ionicons } from '@expo/vector-icons';
@@ -15,7 +16,17 @@ const screenOptions = {
         bottom: 0,
         right: 0,
         left: 0,
-        elevation: 0,
+        ...Platform.select({
+            ios: {
+                shadowColor: 'black',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.3,
+                shadowRadius: 4,
+            },
+            android: {
+                elevation: 4,
+            },
+        }),
         height: 70,
     },
 };

@@ -1,13 +1,18 @@
-import { Platform, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import { Platform, StyleSheet, Text, TouchableOpacity, View, Image, Alert } from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import { useDispatch, useSelector } from 'react-redux';
 import CustomInput from '../../../components/customUI/CustomInput';
 import { COLORS, SIZES } from '../../../constants';
 import CustomButton from '../../../components/customUI/CustomButton';
 import CategoryBox from './CategoryBox';
+import { createCategory } from '../../../redux/features/storeSlices';
 
 const AddCategoryForm = () => {
+    const accessToken = useSelector((state) => state.auth.accessToken);
+    const store = useSelector((state) => state.store.store);
+    const dispatch = useDispatch();
     const [iconUri, setIconUri] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -24,6 +29,22 @@ const AddCategoryForm = () => {
         if (!result.cancelled) {
             const iconUri = result.assets[0].uri;
             setIconUri(iconUri);
+        }
+    };
+
+    const submit = async () => {
+        try {
+            await dispatch(createCategory(title, description, iconUri, accessToken));
+            Alert.alert('Notify', 'Add new category successfully!');
+            setIconUri('');
+            setTitle('');
+            setDescription('');
+        } catch (error) {
+            if (error.message === 'Request timeout') {
+                Alert.alert('Error', 'Server does not response!');
+            } else {
+                Alert.alert('Error', error);
+            }
         }
     };
 
@@ -61,7 +82,7 @@ const AddCategoryForm = () => {
                 />
             </View>
             <View style={styles.buttonContainer}>
-                <CustomButton text={'Add Category'} onPress={() => {}} />
+                <CustomButton text={'Add Category'} onPress={submit} />
             </View>
             <CategoryBox />
         </View>
@@ -91,7 +112,6 @@ const styles = StyleSheet.create({
         height: 120,
         backgroundColor: COLORS.white,
         borderRadius: 10,
-        elevation: 5,
         marginBottom: 12,
         ...Platform.select({
             ios: {

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Platform } from 'react-native';
 import React from 'react';
 
 import { MaterialIcons } from '@expo/vector-icons';
@@ -55,8 +55,18 @@ const styles = StyleSheet.create({
         height: 50,
         paddingLeft: 10,
         paddingRight: 10,
-        elevation: 5,
-        marginBottom: 15,
+        ...Platform.select({
+            ios: {
+                shadowColor: 'black',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.3,
+                shadowRadius: 4,
+            },
+            android: {
+                elevation: 4,
+            },
+        }),
+        marginBottom: 30,
     },
     IconContainer: {
         flexDirection: 'row',
@@ -82,6 +92,16 @@ const styles = StyleSheet.create({
         width: 30,
         backgroundColor: COLORS.primary,
         borderRadius: 5,
-        elevation: 2,
+        ...Platform.select({
+            ios: {
+                shadowColor: 'black',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.3,
+                shadowRadius: 4,
+            },
+            android: {
+                elevation: 4,
+            },
+        }),
     },
 });

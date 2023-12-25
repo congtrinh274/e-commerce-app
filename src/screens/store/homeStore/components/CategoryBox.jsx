@@ -11,7 +11,6 @@ const CategoryBox = () => {
     const navigation = useNavigation();
     const store = useSelector((state) => state.store.store);
     const categories = store.categories;
-    console.log(categories);
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
