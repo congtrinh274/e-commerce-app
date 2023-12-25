@@ -9,5 +9,19 @@ import ProductDetails from './product/ProductDetails';
 import VerifyEmail from './verify/VerifyEmail';
 import StoreRegister from './store/storeRegister/StoreRegister';
 import HomeStore from './store/homeStore/HomeStore';
+import AddCategory from './category/AddCategory';
 
-export { Splash, Login, Register, Home, Search, Profile, Cart, ProductDetails, VerifyEmail, StoreRegister, HomeStore };
+export {
+    Splash,
+    Login,
+    Register,
+    Home,
+    Search,
+    Profile,
+    Cart,
+    ProductDetails,
+    VerifyEmail,
+    StoreRegister,
+    HomeStore,
+    AddCategory,
+};

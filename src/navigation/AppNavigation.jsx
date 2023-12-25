@@ -2,7 +2,17 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import BottomTabNavigation from './BottomTabNavigation';
-import { Splash, Login, Register, Cart, ProductDetails, VerifyEmail, StoreRegister, HomeStore } from '../screens';
+import {
+    Splash,
+    Login,
+    Register,
+    Cart,
+    ProductDetails,
+    VerifyEmail,
+    StoreRegister,
+    HomeStore,
+    AddCategory,
+} from '../screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +29,7 @@ const AppNavigation = () => {
                 <Stack.Screen name="VerifyEmail" component={VerifyEmail} />
                 <Stack.Screen name="StoreRegister" component={StoreRegister} />
                 <Stack.Screen name="HomeStore" component={HomeStore} />
+                <Stack.Screen name="AddCategory" component={AddCategory} />
             </Stack.Navigator>
         </NavigationContainer>
     );

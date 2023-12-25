@@ -1,30 +1,20 @@
-import { StyleSheet, FlatList, TouchableOpacity, View, Text } from 'react-native';
+import { StyleSheet, FlatList, Platform, View, Text } from 'react-native';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
-import { COLORS, SIZES } from '../../../../constants';
-import CustomText from '../../../../components/customUI/CustomText';
-import CategoryCard from '../../../../components/customUI/CategoryCard';
+import { COLORS, SIZES } from '../../../constants';
+import CustomText from '../../../components/customUI/CustomText';
+import CategoryCard from '../../../components/customUI/CategoryCard';
 
 const CategoryBox = () => {
-    const navigation = useNavigation();
     const store = useSelector((state) => state.store.store);
-    const categories = store.categories;
-    console.log(categories);
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
                 <View style={styles.headerTitle}>
                     <Ionicons name="md-logo-dropbox" size={24} color={COLORS.red} />
-                    <CustomText style={styles.title}>Categories</CustomText>
+                    <CustomText style={styles.title}>Your categories</CustomText>
                 </View>
-                <TouchableOpacity onPress={() => navigation.navigate('AddCategory')} style={styles.btnContainer}>
-                    <View style={styles.ShowShopBtn}>
-                        <CustomText style={styles.textSign}>Add new category</CustomText>
-                        <Ionicons name="add-circle" size={20} color={COLORS.lightGreen} marginLeft={6} />
-                    </View>
-                </TouchableOpacity>
             </View>
             <View style={styles.itemContainer}>
                 {store.categories.length !== 0 ? (
@@ -47,7 +37,20 @@ export default CategoryBox;
 
 const styles = StyleSheet.create({
     container: {
-        padding: 8,
+        marginTop: 100,
+        width: '100%',
+        borderRadius: 6,
+        ...Platform.select({
+            ios: {
+                shadowColor: 'black',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.3,
+                shadowRadius: 4,
+            },
+            android: {
+                elevation: 4,
+            },
+        }),
     },
     headerContainer: {
         padding: 8,
@@ -81,6 +84,7 @@ const styles = StyleSheet.create({
         fontFamily: 'medium',
     },
     itemContainer: {
+        marginTop: 24,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',

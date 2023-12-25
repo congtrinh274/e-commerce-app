@@ -7,7 +7,7 @@ import { COLORS } from '../../../constants';
 import CustomText from '../../../components/customUI/CustomText';
 import styles from './homeStore.styles';
 import { OrderBox, CategoryBox, ProductBox } from './components';
-import Separate from '../../../components/customUI/separate';
+import Separate from '../../../components/customUI/Separate';
 
 const HomeStore = () => {
     const store = useSelector((state) => state.store);

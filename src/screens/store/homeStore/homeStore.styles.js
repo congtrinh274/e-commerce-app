@@ -1,8 +1,6 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native';
 import { COLORS, SIZES } from '../../../constants';
 
-const { height } = Dimensions.get('window');
-
 const styles = StyleSheet.create({
     topBarContainer: {
         width: '100%',
