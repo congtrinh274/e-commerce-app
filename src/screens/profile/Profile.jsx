@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions, Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { Ionicons } from '@expo/vector-icons';
-import { EditButton, ProfilePic, ProfileBody } from './components';
+import { ProfilePic } from './components';
 import OptionList from '../../components/customUI/OptionList';
 import { useNavigation } from '@react-navigation/native';
+import { getStore } from '../../redux/features/storeSlices';
 
 const { width, height } = Dimensions.get('window');
 
 const Profile = () => {
     const user = useSelector((state) => state.auth.user);
+    const accessToken = useSelector((state) => state.auth.accessToken);
     const loading = useSelector((state) => state.auth.isLoading);
     const [imageURL, setImageURL] = useState('');
     const [filename, setFilename] = useState('');
@@ -18,6 +20,21 @@ const Profile = () => {
     const [uploadButton, setUploadButton] = useState(true);
 
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+
+    const getHomeStoreHandler = async (userId) => {
+        try {
+            await dispatch(getStore(userId, accessToken));
+            navigation.navigate('HomeStore');
+        } catch (error) {
+            // if (error.message === 'Request timeout') {
+            //     Alert.alert('Error', 'Server does not response!');
+            // } else {
+            //     Alert.alert('Error', error);
+            // }
+            console.log(error);
+        }
+    };
 
     return (
         <ActionSheetProvider>
@@ -42,7 +59,9 @@ const Profile = () => {
                                 text={user.store ? 'Your Store' : 'Register to open your store'}
                                 Icon={Ionicons}
                                 iconName={'megaphone-sharp'}
-                                onPress={() => navigation.navigate('StoreRegister')}
+                                onPress={() =>
+                                    user.store ? getHomeStoreHandler(user._id) : navigation.navigate('StoreRegister')
+                                }
                             />
                             <OptionList text={'Logout'} Icon={Ionicons} iconName={'log-out'} onPress={async () => {}} />
                         </View>

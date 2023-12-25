@@ -9,7 +9,7 @@ const StoreRegister = () => {
         <View>
             <ImageBackground
                 style={{ flex: 1, position: 'absolute', height, width }}
-                source={require('../../../assets/Images/flower3.jpg')}
+                source={require('../../../../assets/Images/flower3.jpg')}
                 blurRadius={10}
             ></ImageBackground>
             <StoreRegisterForm />

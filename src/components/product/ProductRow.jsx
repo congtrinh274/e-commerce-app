@@ -4,13 +4,13 @@ import styles from './productRow.styles';
 import { SIZES } from '../../constants';
 import ProductCartView from './ProductCartView';
 
-const productRow = () => {
+const ProductRow = ({ icon, handler }) => {
     const products = [1, 2, 3, 4];
     return (
         <View style={styles.container}>
             <FlatList
                 data={products}
-                renderItem={({ item }) => <ProductCartView />}
+                renderItem={({ item }) => <ProductCartView icon={icon} handler={handler} />}
                 horizontal
                 contentContainerStyle={{ columnGap: SIZES.medium }}
             />
@@ -18,4 +18,4 @@ const productRow = () => {
     );
 };
 
-export default productRow;
+export default ProductRow;

@@ -1,5 +1,5 @@
 import { View, StyleSheet } from 'react-native';
-import { COLORS } from '../../../constants';
+import { COLORS } from '../../../../constants';
 import { IconButton, TextInput } from 'react-native-paper';
 
 const Field = ({ label, keyboardType, value, onChangeText, icon = false }) => {

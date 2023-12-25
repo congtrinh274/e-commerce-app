@@ -13,11 +13,11 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS } from '../../../constants';
-import CustomText from '../../../components/customUI/CustomText';
+import { COLORS } from '../../../../constants';
+import CustomText from '../../../../components/customUI/CustomText';
 import TextInput from './Field';
-import { storeRegisterValidator as validate } from '../../../utils/validator/storeRegisterValidator';
-import { registerStore } from '../../../redux/features/storeSlices';
+import { storeRegisterValidator as validate } from '../../../../utils/validator/storeRegisterValidator';
+import { registerStore } from '../../../../redux/features/storeSlices';
 import styles from './storeRegisterForm.styles';
 
 const StoreRegisterForm = () => {

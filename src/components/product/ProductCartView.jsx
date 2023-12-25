@@ -5,10 +5,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../../constants';
 import { useNavigation } from '@react-navigation/native';
 
-const ProductCartView = () => {
+const ProductCartView = ({ icon = 'add-circle', handler }) => {
     const navigation = useNavigation();
     return (
-        <TouchableOpacity onPress={() => navigation.navigate('ProductDetails')}>
+        <TouchableOpacity onPress={handler}>
             <View style={styles.container}>
                 <View style={styles.imageContainer}>
                     <Image
@@ -31,7 +31,7 @@ const ProductCartView = () => {
                     </Text>
                 </View>
                 <TouchableOpacity style={styles.addBtn}>
-                    <Ionicons name="add-circle" size={35} color={COLORS.primary} />
+                    <Ionicons name={icon} size={35} color={COLORS.primary} />
                 </TouchableOpacity>
             </View>
         </TouchableOpacity>
