@@ -1,4 +1,3 @@
-// authSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -40,7 +39,7 @@ export const registerStore =
         dispatch(REGISTER_LOADING());
         try {
             const response = await axios.post(
-                'http://192.168.1.11:3000/store/create',
+                'http://192.168.1.12:3000/store/create',
                 {
                     name: shopName,
                     bio,
@@ -81,7 +80,7 @@ export const createCategory = (title, description, iconUri, accessToken) => asyn
     });
 
     try {
-        const response = await axios.post('http://192.168.1.11:3000/category/create', data, {
+        const response = await axios.post('http://192.168.1.12:3000/category/create', data, {
             timeout: 3000,
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -103,7 +102,7 @@ export const createCategory = (title, description, iconUri, accessToken) => asyn
 
 export const getStore = (userId, accessToken) => async (dispatch) => {
     try {
-        const response = await axios.get(`http://192.168.1.11:3000/store/user?userId=${userId}`, {
+        const response = await axios.get(`http://192.168.1.12:3000/store/user?userId=${userId}`, {
             timeout: 3000,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

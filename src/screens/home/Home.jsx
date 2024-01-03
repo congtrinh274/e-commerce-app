@@ -36,7 +36,6 @@ const Home = () => {
                 <Carousel />
                 <Heading />
                 <ProductRow handler={() => navigation.navigate('ProductDetails')} />
-                <ProductRow handler={() => navigation.navigate('ProductDetails')} />
                 <View style={{ paddingBottom: 100 }}></View>
             </ScrollView>
         </SafeAreaView>

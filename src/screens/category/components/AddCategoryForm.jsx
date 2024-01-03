@@ -26,7 +26,7 @@ const AddCategoryForm = () => {
             quality: 0.5,
         });
 
-        if (!result.cancelled) {
+        if (!result.canceled) {
             const iconUri = result.assets[0].uri;
             setIconUri(iconUri);
         }

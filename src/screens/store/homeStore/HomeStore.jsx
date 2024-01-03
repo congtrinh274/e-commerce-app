@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, TouchableOpacity, ScrollView, SafeAreaView, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,9 +10,15 @@ import { OrderBox, CategoryBox, ProductBox } from './components';
 import Separate from '../../../components/customUI/Separate';
 
 const HomeStore = () => {
-    const store = useSelector((state) => state.store);
+    const store = useSelector((state) => state.store.store);
     const navigation = useNavigation();
 
+    const [selectedCategory, setSelectedCategory] = useState(null);
+
+    const handleSelectCategory = (categoryID) => {
+        setSelectedCategory(categoryID);
+    };
+    console.log(selectedCategory);
     return (
         <SafeAreaView>
             <View style={styles.topBarContainer}>
@@ -45,8 +51,8 @@ const HomeStore = () => {
                             source={require('../../../../assets/Images/defaultProfile.png')}
                         />
                         <View style={styles.shopInfoContainer}>
-                            <CustomText style={styles.shopNameText}>{store.store.name}</CustomText>
-                            <CustomText style={styles.bioText}>{store.store.bio}</CustomText>
+                            <CustomText style={styles.shopNameText}>{store.name}</CustomText>
+                            <CustomText style={styles.bioText}>{store.bio}</CustomText>
                         </View>
                     </View>
                     <TouchableOpacity onPress={() => {}} style={styles.btnContainer}>
@@ -58,9 +64,9 @@ const HomeStore = () => {
                 <Separate />
                 <OrderBox />
                 <Separate />
-                <CategoryBox />
+                <CategoryBox onSelectCategory={handleSelectCategory} />
                 <Separate />
-                <ProductBox />
+                <ProductBox selectedCategory={selectedCategory} />
                 <View style={{ paddingBottom: 100 }}></View>
             </ScrollView>
         </SafeAreaView>

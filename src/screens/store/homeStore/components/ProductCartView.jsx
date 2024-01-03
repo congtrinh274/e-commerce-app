@@ -1,14 +1,13 @@
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import React from 'react';
-import styles from './productCartView.styles';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS } from '../../constants';
+import { COLORS, SIZES } from '../../../../constants';
 import { useNavigation } from '@react-navigation/native';
 
-const ProductCartView = ({ icon = 'add-circle', handler, data }) => {
+const ProductCartView = ({ icon = 'add-circle', data }) => {
     const navigation = useNavigation();
     return (
-        <TouchableOpacity onPress={handler}>
+        <TouchableOpacity>
             <View style={styles.container}>
                 <View style={styles.imageContainer}>
                     <Image
@@ -37,5 +36,51 @@ const ProductCartView = ({ icon = 'add-circle', handler, data }) => {
         </TouchableOpacity>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        width: 182,
+        height: 240,
+        marginEnd: 22,
+        borderRadius: SIZES.medium,
+        backgroundColor: COLORS.secondary,
+    },
+    imageContainer: {
+        flex: 1,
+        width: 170,
+        marginLeft: SIZES.small / 2,
+        marginTop: SIZES.small / 2,
+        borderRadius: SIZES.small,
+        overflow: 'hidden',
+    },
+    image: {
+        aspectRatio: 1,
+        resizeMode: 'cover',
+    },
+    details: {
+        padding: SIZES.small,
+    },
+    title: {
+        fontFamily: 'medium',
+        fontSize: SIZES.large,
+        marginBottom: 4,
+    },
+    description: {
+        fontFamily: 'regular',
+        fontSize: SIZES.small,
+        color: COLORS.gray,
+        marginBottom: 8,
+    },
+    price: {
+        fontFamily: 'medium',
+        fontSize: SIZES.medium,
+        color: COLORS.red,
+    },
+    addBtn: {
+        position: 'absolute',
+        bottom: 0,
+        right: 8,
+    },
+});
 
 export default ProductCartView;

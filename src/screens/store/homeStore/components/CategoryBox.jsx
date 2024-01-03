@@ -1,5 +1,5 @@
 import { StyleSheet, FlatList, TouchableOpacity, View, Text } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
@@ -7,10 +7,21 @@ import { COLORS, SIZES } from '../../../../constants';
 import CustomText from '../../../../components/customUI/CustomText';
 import CategoryCard from '../../../../components/customUI/CategoryCard';
 
-const CategoryBox = () => {
+const CategoryBox = ({ onSelectCategory }) => {
     const navigation = useNavigation();
     const store = useSelector((state) => state.store.store);
-    const categories = store.categories;
+    const [activeItem, setActiveItem] = useState(null);
+
+    const handleItemPress = (item) => {
+        if (activeItem === item._id) {
+            onSelectCategory(null);
+            setActiveItem(null);
+        } else {
+            onSelectCategory(item._id);
+            setActiveItem(item._id);
+        }
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
@@ -29,7 +40,14 @@ const CategoryBox = () => {
                 {store.categories.length !== 0 ? (
                     <FlatList
                         data={store.categories}
-                        renderItem={({ item }) => <CategoryCard name={item.name} icon={item.icon} />}
+                        renderItem={({ item }) => (
+                            <CategoryCard
+                                name={item.name}
+                                icon={item.icon}
+                                active={activeItem === item._id}
+                                onPress={() => handleItemPress(item)}
+                            />
+                        )}
                         horizontal
                         contentContainerStyle={{ columnGap: SIZES.medium }}
                         showsHorizontalScrollIndicator={false}

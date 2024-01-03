@@ -38,7 +38,7 @@ export const login = (email, password) => async (dispatch) => {
     dispatch(AUTH_LOADING());
     try {
         const response = await axios.post(
-            'http://192.168.1.11:3000/auth/login',
+            'http://192.168.1.12:3000/auth/login',
             {
                 email,
                 password,
@@ -66,7 +66,7 @@ export const register = (username, email, password) => async (dispatch) => {
     dispatch(AUTH_LOADING());
     try {
         const response = await axios.post(
-            'http://192.168.1.11:3000/auth/register',
+            'http://192.168.1.12:3000/auth/register',
             {
                 username,
                 email,

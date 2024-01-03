@@ -1,15 +1,13 @@
 import { Image, StyleSheet, Text, TouchableOpacity, Platform } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { COLORS, SIZES } from '../../constants';
 
-const CategoryCard = ({ icon = 'logo-electron', name = 'Categories' }) => {
-    const apiBaseUrl = 'http://192.168.1.11:3000'; // Thay thế bằng địa chỉ thực tế của server
-
-    // Xử lý đường dẫn tương đối thành đường dẫn tuyệt đối
+const CategoryCard = ({ icon = 'logo-electron', name = 'Categories', active = false, onPress }) => {
+    const apiBaseUrl = 'http://192.168.1.12:3000';
     const absoluteIconPath = `${apiBaseUrl}/${icon.replace(/\\/g, '/')}`;
 
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={[styles.container, active && styles.active]} onPress={onPress}>
             <Image style={styles.icon} source={{ uri: absoluteIconPath }} />
             <Text style={styles.name}>{name}</Text>
         </TouchableOpacity>
@@ -38,6 +36,9 @@ const styles = StyleSheet.create({
                 elevation: 4,
             },
         }),
+    },
+    active: {
+        backgroundColor: COLORS.lighterGreen,
     },
     icon: {
         width: 24,

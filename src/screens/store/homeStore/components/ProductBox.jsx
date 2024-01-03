@@ -1,10 +1,10 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import ProductRow from '../../../../components/product/ProductRow';
+import ProductRow from './ProductRow';
 import { COLORS, SIZES } from '../../../../constants';
 
-const ProductBox = ({ heading = 'Products' }) => {
+const ProductBox = ({ heading = 'Products', selectedCategory }) => {
     return (
         <View style={styles.container}>
             <View style={styles.headingContainer}>
@@ -13,7 +13,7 @@ const ProductBox = ({ heading = 'Products' }) => {
                     <Ionicons name="ios-add-outline" style={styles.addIcon} />
                 </TouchableOpacity>
             </View>
-            <ProductRow icon="create" />
+            <ProductRow icon="create" selectedCategory={selectedCategory} />
         </View>
     );
 };

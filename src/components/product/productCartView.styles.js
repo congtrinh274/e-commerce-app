@@ -25,23 +25,25 @@ const styles = StyleSheet.create({
         padding: SIZES.small,
     },
     title: {
-        fontFamily: 'bold',
+        fontFamily: 'medium',
         fontSize: SIZES.large,
-        marginBottom: 2,
+        marginBottom: 4,
     },
-    supplier: {
+    description: {
         fontFamily: 'regular',
         fontSize: SIZES.small,
         color: COLORS.gray,
+        marginBottom: 8,
     },
     price: {
         fontFamily: 'medium',
         fontSize: SIZES.medium,
+        color: COLORS.red,
     },
     addBtn: {
         position: 'absolute',
-        bottom: SIZES.xSmall,
-        right: SIZES.xSmall,
+        bottom: 0,
+        right: 8,
     },
 });
 
